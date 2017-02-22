@@ -24,7 +24,8 @@ function ath_update_urls_page(){
 
     $guids = array();
     foreach( $pages as $page ){
-      $guids[] = explode('?', $page->guid, 2)[0];
+      $thisURL  = explode('?', $page->guid, 2)[0];
+      $guids[]  = substr($thisURL, 0, -1);
     }
 
     if (count(array_unique($guids)) > 0) {
