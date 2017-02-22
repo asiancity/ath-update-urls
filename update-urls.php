@@ -32,12 +32,14 @@ function ath_update_urls_page(){
     if (count(array_unique($guids)) > 0) {
       $guid_arr = array_unique($guids);
       foreach( $guid_arr as $old_url ){
-        echo '<ul class="notice notice-success" style="margin-top:30px;margin-bottom:20px;padding:10px">';
-        echo "<li>UPDATE ".$wpdb->prefix."_options SET option_value = replace(option_value, '".$old_url."', '".$current."') WHERE option_name = 'home' OR option_name = 'siteurl';</li>";
-        echo "<li>UPDATE ".$wpdb->prefix."_posts SET guid = replace(guid, '".$old_url."','".$current."');</li>";
-        echo "<li>UPDATE ".$wpdb->prefix."_posts SET post_content = replace(post_content, '".$old_url."', '".$current."');</li>";
-        echo "<li>UPDATE ".$wpdb->prefix."_postmeta SET meta_value = replace(meta_value,'".$old_url."','".$current."');</li>";
-        echo '</ul>';
+        if ( $old_url != $current){
+          echo '<ul class="notice notice-success" style="margin-top:30px;margin-bottom:20px;padding:10px">';
+          echo "<li>UPDATE ".$wpdb->prefix."_options SET option_value = replace(option_value, '".$old_url."', '".$current."') WHERE option_name = 'home' OR option_name = 'siteurl';</li>";
+          echo "<li>UPDATE ".$wpdb->prefix."_posts SET guid = replace(guid, '".$old_url."','".$current."');</li>";
+          echo "<li>UPDATE ".$wpdb->prefix."_posts SET post_content = replace(post_content, '".$old_url."', '".$current."');</li>";
+          echo "<li>UPDATE ".$wpdb->prefix."_postmeta SET meta_value = replace(meta_value,'".$old_url."','".$current."');</li>";
+          echo '</ul>';
+        }
       }
     }
   }
